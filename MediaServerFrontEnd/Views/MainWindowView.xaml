@@ -1,0 +1,51 @@
+﻿<metro:Window x:Class="MediaServerFrontEnd.Views.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+        xmlns:metro="http://schemas.codeplex.com/elysium" 
+        xmlns:cal="http://www.caliburnproject.org"
+        ResizeMode="NoResize"
+        Title="MainWindow" Height="350" Width="525">
+    <!-- No resizing for now until I take the time to make everything pretty. Elysium has a weird Window. -->
+    <Window.Resources>
+        <Style x:Key="MetadataDisplay" BasedOn="{StaticResource {x:Type Label}}" TargetType="{x:Type Label}" >
+            <Style.Setters>
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontFamily" Value="Segoe UI" />
+            </Style.Setters>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="38"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        
+        <ListBox Name="Messages" ItemsSource="{Binding Path=Messages}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid cal:Bind.Model="{Binding}" Background="#FF017BCD" Margin="0" Width="508">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="150*" />
+                            <ColumnDefinition Width="100*" />
+                            <ColumnDefinition Width="50*" />
+                            <ColumnDefinition Width="100*" />
+                            <ColumnDefinition Width="100*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Label Content="{Binding Title, Mode=OneWay}" Grid.Column="0" Style="{DynamicResource MetadataDisplay}" />
+                        <Label Content="{Binding Artist, Mode=OneWay}" Grid.Column="1" Style="{DynamicResource MetadataDisplay}" />
+                        <Label Content="{Binding Duration, Mode=OneWay}" Grid.Column="2" Style="{DynamicResource MetadataDisplay}" />
+                        <Label Content="{Binding Album, Mode=OneWay}" Grid.Column="3" Style="{DynamicResource MetadataDisplay}" />
+                        <Label Content="{Binding Genre, Mode=OneWay}" Grid.Column="4" Style="{DynamicResource MetadataDisplay}" />
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button x:Name="TestButton" Content="Test Fire" Width="120" Height="30" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="4" />
+
+    </Grid>
+</metro:Window>
